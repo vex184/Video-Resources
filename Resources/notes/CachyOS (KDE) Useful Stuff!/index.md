@@ -11,7 +11,7 @@ So check back on this guide as I can get to updating it! Feel free to use this i
 - CachyOS
 - Kernal: ~7.2.0-1-cachyos (64bit)
 - KDE Plasma: ~6.7.4
-- The Laptop I have: [rog.asus.com](https://rog.asus.com/us/laptops/rog-zephyrus/rog-zephyrus-g16-2025-gu605/ (285H, 32GB RAM, RTX 5070 Ti (mobile), 1TB)
+- The Laptop I have: [rog.asus.com](https://rog.asus.com/us/laptops/rog-zephyrus/rog-zephyrus-g16-2025-gu605/) (285H, 32GB RAM, RTX 5070 Ti (mobile), 1TB SSD)
 
 <br>
 
@@ -74,7 +74,7 @@ ___
 ___
 <div style="page-break-after: always;"></div>
 
-# Enabling DLSS & FSR Upgrades
+# Enabling DLSS & FSR Upgrades (Steam Launch Options!)
 - *Very Important for gaming on Linux! A lot of these options do not have interface options like they do in Windows*
 
 ### Requirements
@@ -87,6 +87,15 @@ ___
 	- Or as a CachyOS package:
 	![](images/Pasted%20image%2020260824232434.png)
 - Just make sure to restart Steam after in order for the new Protons to be recognized
+
+### Where They are Inputed
+- We will be putting these commands for Steam on an individual game basis
+1. Go to the game settings
+2. Properties
+	![](images/Pasted%20image%2020260825000844.png)
+3. General
+4. Launch Options
+	![](images/Pasted%20image%2020260825001038.png)
 
 ### Example DLSS Command
 - I.E. this is a command that will give the DLSS debug menu (indicator), upgrade DLSS to the latest version, pick what letter preset, and display mangoHUD for stats:
@@ -134,15 +143,29 @@ PROTON_DLSS_INDICATOR=1 PROTON_DLSS_UPGRADE=1 DXVK_NVAPI_DRS_SETTINGS="NGX_DLSS_
 ___
 <div style="page-break-after: always;"></div>
 
-# Fixing the Download  Speeds in Steam
+# Fixing the Download Speeds in Steam
 
+### My Experiences
 - At least in my experience on btrfs, KDE, with Limine. I get VERY reduced download speeds on Linux. 
 	- Same experience on SteamOS (did try this though)
 		- It would never go over the 1Gbps even though the adaptors are capable of 2.5Gbps+
+- This doesn't seem to be caused by the network connection itself because when checking in the browser with a speed test it hits full speeds.
+	- Weird part too. When locally transferring games over 2.5Gbit connections, SteamOS would NEVER hit those speeds
 
-- `chattr +C ~/.steam/steam/steamapps`
-	- This command removes the "Copy on Write" for the Steam directory
-	- Which means it takes away the ability to have snapshots here. I don't think it's *too* big of a deal for a Steam Library, but up to you
+### The Fix
+- *This command removes the "Copy on Write" for the Steam directory*
+```
+chattr +C ~/.steam/steam/steamapps
+```
+
+- Change the `~/.steam/steam/steamapps` directory to where your Steam Library is located
+	- It may be helpful to show hidden files in the file manager. Here is how you do it in Dolphin:
+		![](images/Pasted%20image%2020260824235652.png)
+	- Just locate it in your file manager and copy the path:
+		![](images/Pasted%20image%2020260824235804.png)
+
+### Caveat
+- This will take away the ability to have snapshots on the Steam Library. I don't think it's *too* big of a deal for a Steam Library, but up to you.
 
 
 
@@ -199,16 +222,22 @@ ___
 
 ___
 <div style="page-break-after: always;"></div>
+# To become getting Windows Hello Running!
 
+%%
 # Getting Windows Hello (Howdy) (WIP)
 for Howdy
 - i edited the `/etc/pam.d/system-auth` and `/etc/pam.d/system-local-login`
 - **NEED TO COME BACK TO THIS LATER!**
 
-
+%%
 
 ___
 <div style="page-break-after: always;"></div>
+# To Become the Brightness Fix
 
+%%
 # Guide for Fixing Brightness (WIP)
 ![](images/Pasted%20image%2020260820210250.png)
+
+%%
