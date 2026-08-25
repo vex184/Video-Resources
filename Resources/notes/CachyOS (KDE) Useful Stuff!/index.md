@@ -18,7 +18,7 @@ So check back on this guide as I can get to updating it! Feel free to use this i
 
 ___
 <div style="page-break-after: always;"></div>
-<br>
+<br>  
 
 # To allow more display refresh rates and configurations you can run these commands
 #display #linux #cachy 
