@@ -34,7 +34,7 @@ kscreen-doctor output.<OUTPUT>.addCustomMode.2560.1600.120000.full
 	kscreen-doctor --outputs
 ```
 VVV
-![](images/KDE%20showing%20the%20display%20options%201.png)
+![100](images/KDE%20showing%20the%20display%20options%201.png)
 >As you can see at the top it shows the display output. In this case the number would be "1" and that is all you have to do. Replace `<OUTPUT>` with 1 or whatever display number the target is
 
 ### Checking if it worked
