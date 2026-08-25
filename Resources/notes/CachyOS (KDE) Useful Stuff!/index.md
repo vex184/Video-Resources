@@ -15,7 +15,7 @@ So check back on this guide as I can get to updating it! Feel free to use this i
 - KDE Plasma: ~6.7.4
 - The Laptop I have: [rog.asus.com](https://rog.asus.com/us/laptops/rog-zephyrus/rog-zephyrus-g16-2025-gu605/ (285H, 32GB RAM, RTX 5070 Ti (mobile), 1TB)
 
-<br>
+<br>  
 ___
 <div style="page-break-after: always;"></div>
 <br>  
