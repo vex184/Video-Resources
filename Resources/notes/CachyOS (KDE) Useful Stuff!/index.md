@@ -12,7 +12,7 @@ So check back on this guide as I can get to updating it! Feel free to use this i
 - Kernal: ~7.2.0-1-cachyos (64bit)
 - KDE Plasma: ~6.7.4
 - The Laptop I have: [rog.asus.com](https://rog.asus.com/us/laptops/rog-zephyrus/rog-zephyrus-g16-2025-gu605/) (285H, 32GB RAM, RTX 5070 Ti (mobile), 1TB SSD)
-
+<img src="Assets/Attachments/image_1787633145353.png" width="5%">
 <br>
 
 ___
@@ -58,7 +58,10 @@ ___
 ### Editing the Application Details
 - You need to right click Firebot in the app launch and edit it
 - In this field replace what was there (%U) and add this command:
-	``Exec=firebot --ozone-platform=x11 %U``
+```
+	Exec=firebot --ozone-platform=x11 %U
+```
+
 - Should look like this:
 	![](images/Pasted%20image%2020260824230707.png)
 - I specifically had to do this because the only shortcut that will show in the "firewall" is in "launch the application"
@@ -85,6 +88,7 @@ ___
 	- It's available as a Flatpak:
 	![](images/Pasted%20image%2020260824232259.png)
 	- Or as a CachyOS package:
+	
 	![](images/Pasted%20image%2020260824232434.png)
 - Just make sure to restart Steam after in order for the new Protons to be recognized
 
@@ -205,7 +209,7 @@ ___
 	- im not sure where the font manager installs fonts
 		- possible that installing fonts with pacman or shelly does put them in the right place
 	- you basically have to manually install the fonts if you download them off the internet into that folder (which does need admin permission)
-	- Chris Titus has a great vid on this: https://youtu.be/oHsboGBxUuc?si=77_JkFtBdfMuj8zh 
+	- Chris Titus has a [great vid](https://youtu.be/oHsboGBxUuc?si=77_JkFtBdfMuj8zh ) on this
 
 
 
@@ -241,3 +245,5 @@ ___
 ![](images/Pasted%20image%2020260820210250.png)
 
 %%
+
+<img src="image_1787632879058.png" width="50%">
