@@ -12,7 +12,7 @@ So check back on this guide as I can get to updating it! Feel free to use this i
 - Kernal: ~7.2.0-1-cachyos (64bit)
 - KDE Plasma: ~6.7.4
 - The Laptop I have: [rog.asus.com](https://rog.asus.com/us/laptops/rog-zephyrus/rog-zephyrus-g16-2025-gu605/) (285H, 32GB RAM, RTX 5070 Ti (mobile), 1TB SSD)
-<img src="./images/image_1787633221572.png" width="10%">
+![](images/Pasted%20image%2020260825005605.png)
 <br>
 
 ___
