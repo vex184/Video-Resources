@@ -1,9 +1,7 @@
-
-Will be trying to get this up on a GitHub or something and not this PDF lol– just need to figure it out.
-
+# Overview
+<br>
 A Guide of some things that I have learned when using CachyOS. I'll be putting together some more things asap like:
 - Installing Davinci Resolve
-- Windows Hello
 - Adding Refresh Rate Scripts for Laptop Power Modes
 - Fixing the Brightness in this Hybrid Intel x Nvidia GPU Setup
 - Modding Risk of Rain 2 (using R2 Modman)
@@ -21,80 +19,115 @@ ___
 <div style="page-break-after: always;"></div>
 <br>  
 
-# To allow more display refresh rates and configurations you can run these commands
-#display #linux #cachy 
+# Allow More Display Refresh Rates!
+- *More options for your display. Don't go over its capabilities though and they may be less stable than the core ones.*
 
+### Add the Refresh Rate
 ```
 kscreen-doctor output.<OUTPUT>.addCustomMode.2560.1600.120000.full
 ```
+
 - Obviously replace 2560 as horizontal resolution, 1600 as vertical and 120000 as the refresh rate (in millihertz)
 	- "full" should pretty much remain the same
-- you get the ``<OUTPUT>`` by entering this command: 
+- **you get the ``<OUTPUT>`` by entering this command:** 
 ```
 	kscreen-doctor --outputs
 ```
-- This will provide a result that looks like this:
+VVV
 ![](images/KDE%20showing%20the%20display%20options%201.png)
-- As you can see at the top it shows the display output. In this case the number would be "1" and that is all you have to do. Replace ``<OUTPUT>`` with 1 or whatever display number the target is
+>As you can see at the top it shows the display output. In this case the number would be "1" and that is all you have to do. Replace `<OUTPUT>` with 1 or whatever display number the target is
+
+- You may now reinput the `kscreen-doctor --outputs` and double check that it shows up
+- Reload your system settings if it was open and it should appear under the refresh rate options
+	![](images/Pasted%20image%2020260824230216.png)
+
+### Some notes
+- It might drop the refresh rate some decimal below what you inputed. That is okay, it's close enough.
+	- From my experience if you reference this custom rate, then you actually call for the whole number you gave. It will go to the closest number seems like.
 
 
-
-___
+____
 <div style="page-break-after: always;"></div>
 
-# Launching Firebot in X11 Mode
-- Super useful to bypass the requirements for approving hotkeys, then them not working anyways. There are also probably other reasons for doing this
+<br>
 
+# Allow Global Hotkeys in Firebot
+- *Launching in X11 mode instead of Wayland to bypass the "hotkey firewall" that it has.*
+___
+### Editing the Application Details
 - You need to right click Firebot in the app launch and edit it
 - In this field replace what was there (%U) and add this command:
 	``Exec=firebot --ozone-platform=x11 %U``
 - Should look like this:
-	![](images/Pasted%20image%2020260820025942.png)
+	![](images/Pasted%20image%2020260824230707.png)
+- I specifically had to do this because the only shortcut that will show in the "firewall" is in "launch the application"
+	![](images/Pasted%20image%2020260824233742.png)
+- There may be another workaround for this, but this seemed like easiest
+### Caveats
+- X11 is definetely a workaround here and is not nearly as fully featured or efficient as the main display manager Wayland
+- This doesn't seem to work the same way for every app
+	- I didn't not have luck doing the same with OBS, although I am inexperienced
 
 
 
 ___
 <div style="page-break-after: always;"></div>
 
-# Steam Launch Options! (esp. Proton options)
-- Very Important for gaming on Linux! A lot of these options do not have interface options like they do in Windows 
-	- I.E. this is a command that will give the DLSS debug menu (indicator), upgrade DLSS to the latest version, pick what letter preset, and display mangoHUD for stats
+# Enabling DLSS & FSR Upgrades
+- *Very Important for gaming on Linux! A lot of these options do not have interface options like they do in Windows*
+
+### Requirements
+- At least need to be on ProtonGE.
+	- CachyOS-Proton can also do this stuff built in, but at least for FSR 4 on RDNA 4, it does automatically upgrade it. For DLSS, no.
+	- This is also possible on Proton Experimental, but you have to manually download the DLLs to have them injected which is annoying
+- Download proton versions easily from [ProtonPlus](https://protonplus.vysp3r.com/) in Shelly
+	- It's available as a Flatpak:
+	![](images/Pasted%20image%2020260824232259.png)
+	- Or as a CachyOS package:
+	![](images/Pasted%20image%2020260824232434.png)
+- Just make sure to restart Steam after in order for the new Protons to be recognized
+
+### Example DLSS Command
+- I.E. this is a command that will give the DLSS debug menu (indicator), upgrade DLSS to the latest version, pick what letter preset, and display mangoHUD for stats:
 ```
-		PROTON_DLSS_INDICATOR=1 PROTON_DLSS_UPGRADE=1 DXVK_NVAPI_DRS_SETTINGS="NGX_DLSS_SR_OVERRIDE_RENDER_PRESET_SELECTION=RENDER_PRESET_L" mangohud %command%
+PROTON_DLSS_INDICATOR=1 PROTON_DLSS_UPGRADE=1 DXVK_NVAPI_DRS_SETTINGS="NGX_DLSS_SR_OVERRIDE_RENDER_PRESET_SELECTION=RENDER_PRESET_L" mangohud %command%
 ```
-- Granted the upscaler stuff only really works with the CachyOS Proton, ProtonGE, or sometimes the Proton Experiemental at the moment
-- ***How it's formatted***
-	- You separate them with spaces
+
+### How it's formatted
+- You separate them with spaces
 	- The `=1` is usually binary for enabling or `=0` for disabling
 	- EVERYTHING with these modifiers end with the end with the `%command%`
 		- This signifies it takes place before running the game
 
-| ``PROTON_DLSS_INDICATOR=1``                                                                                                   | The DLSS debug. Very similar to the registry teak you can use on Windows                                                                      |
-| ----------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| ``PROTON_DLSS_UPGRADE=1``                                                                                                     | Upgrade to latest DLSS version fetched by the Proton                                                                                          |
-| <small>``DXVK_NVAPI_DRS_SETTINGS=``<br>followed by ``"NGX_DLSS_SR_OVERRIDE_RENDER_PRESET_SELECTION=RENDER_PRESET_L"``</small> | Picks the letter preset. The last letter is all you need to change (make sure the version of DLSS you are running supports the letter preset) |
-| ``mangohud``                                                                                                                  | Enables the FPS overlay configurable by Goverlay. Doesn't need the `=1`                                                                       |
 
+| ``PROTON_DLSS_INDICATOR=1``                                                                                                     | The DLSS debug. Very similar to the registry teak you can use on Windows                                                                      |
+| ------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| ``PROTON_DLSS_UPGRADE=1``                                                                                                       | Upgrade to latest DLSS version fetched by the Proton                                                                                          |
+| <small>``DXVK_NVAPI_DRS_SETTINGS=``<br>*followed by* ``"NGX_DLSS_SR_OVERRIDE_RENDER_PRESET_SELECTION=RENDER_PRESET_L"``</small> | Picks the letter preset. The last letter is all you need to change (make sure the version of DLSS you are running supports the letter preset) |
+| ``mangohud``                                                                                                                    | Enables the FPS overlay configurable by Goverlay. Doesn't need the `=1`                                                                       |
+
+### What I Used While Testing
 - The specific setup I used when testing was:
 	`PROTON_DLSS_INDICATOR=1 mangohud %command%`
+- It's a simple setup to just double check what DLSS version (didn't work on Valve's Protons) is running in game and display MangoHUD 
 
-There are a HUGE list of commands the ProtonGE GitHUB:
-	https://github.com/gloriouseggroll/proton-ge-custom#options
-
-This is another useful list that may apply (similar to the ProtonGE stuff)
-	https://github.com/BananaWorks07/Proton/blob/em-10/docs/EM-ADDITIONS.md
-	- mostly the stuff for Wayland specifically
-
-
-- **We have also had some luck with some AMD stuff:**
+### AMD FSR Upgrade Version
+- *using ProtonGE*
 
 ![](images/Pasted%20image%2020260820033558.png)
-	``PROTON_FSR4_RDNA3_UPGRADE=1 PROTON_FSR4_INDICATOR=1 %command%`` -- this was using ProtonGE. CachyOS-Proton seems to upgrade automatically
+>`PROTON_FSR4_RDNA3_UPGRADE=1 PROTON_FSR4_INDICATOR=1 %command%` -- this was using ProtonGE. CachyOS-Proton seems to upgrade automatically
+
+#### AMD Commands
 
 | ``PROTON_FSR4_RDNA3_UPGRADE=1`` | Upgrades to FSR 4 on RNDA 3 (diff than RDNA 4)                                         |
 | ------------------------------- | -------------------------------------------------------------------------------------- |
 | ``PROTON_FSR4_UPGRADE=1``       | Upgrade to FSR 4 on RDNA 4                                                             |
 | ``PROTON_FSR4_INDICATOR=1``     | Gives the little overlay in the top left. Only seems to run if FSR 4 is being upgraded |
+
+### Handy Resources if You Want to Do More
+- There are a HUGE list of commands on the [ProtonGE GitHUB](https://github.com/gloriouseggroll/proton-ge-custom#options)
+- This is another useful list that may apply (similar to the ProtonGE stuff): [Proton-EM Additions](https://github.com/BananaWorks07/Proton/blob/em-10/docs/EM-ADDITIONS.md)
+	- Mostly the stuff for Wayland specifically
 
 
 ___
